@@ -6,7 +6,7 @@
       absolute
       :value="showDetails"
     >
-      <v-card width="300" height="300"
+      <v-card width="400" height="auto"
       >
         <v-card-title>
           <v-text-field
@@ -25,6 +25,14 @@
           >
 
           </v-text-field>
+          <v-color-picker
+            label="Color"
+            v-model="activeNode._color"
+            @change="updateNote"
+            mode="hexa"
+          >
+
+          </v-color-picker>
         </v-card-text>
         <v-card-actions class="d-flex align-center justify-end">
           <v-btn
@@ -36,7 +44,7 @@
           <v-btn
             @click="showDetails=false"
           >
-            Close
+            Done
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -56,14 +64,14 @@ export default {
     return {
       currentMaxID: 9,
       nodes: [
-        {id: 1, name: 'Me', note: "Heyaaa"},
+        {id: 1, name: 'Me', note: "Heyaaa", _size:"40", _color:"orange"},
 
       ],
       links: [],
       canvas: false,
       nodeSize: 20,
       showDetails: false,
-      activeNode: {id: 1, name: 'Me', note: "Heyaaa"},
+      activeNode: {id: 1, name: 'Me', note: "Heyaaa", _color:"orange"},
 
 
     }
@@ -109,6 +117,7 @@ export default {
         if (node.id === this.activeNode.id) {
           node.name = this.activeNode.name
           node.note = this.activeNode.note
+          node._color = this.activeNode.color
         }
       })
     },
